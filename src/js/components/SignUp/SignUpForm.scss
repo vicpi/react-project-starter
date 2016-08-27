@@ -1,0 +1,11 @@
+.signup-form-container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  text-align: left;
+  font-size: 1.6rem;
+  .signup-form {
+    margin-top: 3rem;
+    width: 50%;
+  }
+}

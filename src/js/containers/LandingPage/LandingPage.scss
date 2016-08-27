@@ -1,0 +1,25 @@
+.github-username-container {
+  a.generate-button {
+    width: 100%;
+    margin-top: 1rem;
+  }
+}
+@media (min-width: 480px) {
+  .landing {
+    padding-top: 20%;
+    .inner {
+      .github-username-container {
+        margin-top: 3rem;
+        a.generate-button {
+          margin-left: 1rem;
+          width: 20%;
+          margin-top: 0;
+        }
+        .github-username {
+          display: inline-block;
+          width: 60%;
+        }
+      }
+    }
+  }
+}
