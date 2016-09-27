@@ -1,10 +1,8 @@
 import * as types from '../constants/ActionTypes';
-import {
-  getRepositoriesUrl,
-  getRepositoryLanguagesUrl
-} from '../services/apiGithubService';
 import fetch from 'isomorphic-fetch';
-import { generateUserInformationRequest } from '../api/github/userInformation';
+import { userInformationRequest } from '../api/github/userInformation';
+import { repositoriesRequest } from '../api/github/repositories';
+import { repositoryLanguageRequest } from '../api/github/languages';
 
 export function refreshUserInformationRequest() {
   return {
@@ -43,15 +41,11 @@ export function refreshLanguages(languages) {
 
 export function fetchRepositories(githubUsername) {
   return function (dispatch) {
-    return fetch(getRepositoriesUrl(githubUsername))
-      .then((res) => res.json())
+    return repositoriesRequest(githubUsername)
       .then((repositories) => {
         let allRepositories = repositories;
-        let languageUrls = repositories.map((repository) => {
-          return getRepositoryLanguagesUrl(githubUsername, repository.name);
-        });
-        let promises = languageUrls.map((languageUrl) => {
-          return fetch(languageUrl).then((res) => res.json());
+        let promises = repositories.map((repository) => {
+          return repositoryLanguageRequest(githubUsername, repository.name) ;
         });
 
         Promise.all(promises).then((responses) => {
@@ -73,7 +67,7 @@ export function fetchRepositories(githubUsername) {
 export function fetchUserInformation(githubUsername) {
   return function (dispatch) {
     dispatch(refreshUserInformationRequest());
-    return fetch(generateUserInformationRequest(githubUsername))
+    return userInformationRequest(githubUsername)
       .then((response) => response.json())
       .then((userInformation) => {
         dispatch(refreshUserInformationSuccess(userInformation));

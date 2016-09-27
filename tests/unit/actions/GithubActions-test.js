@@ -3,7 +3,7 @@ import thunk from 'redux-thunk';
 import * as actions from '../../../src/js/actions/GithubActions';
 import * as types from '../../../src/js/constants/ActionTypes';
 import {
-  generateUserInformationRequest, sampleUserInformationResponse, requestPath
+  getUserInformationUri, sampleUserInformationResponse, requestPath
 } from '../../../src/js/api/github/userInformation';
 import nock from 'nock';
 import { expect } from 'chai';

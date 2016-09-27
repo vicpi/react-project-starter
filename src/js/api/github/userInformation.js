@@ -1,4 +1,20 @@
-export function generateUserInformationRequest(githubUsername) {
+import {config} from '../../config/config';
+import fetch from 'isomorphic-fetch';
+
+/**
+ * Make user information request
+ * @param githubUsername
+ * @returns {Promise}
+ */
+export function userInformationRequest(githubUsername) {
+  if (config.useFixtures === true) {
+    return Promise.resolve(sampleUserInformationResponse());
+  } else {
+    return fetch(getUserInformationUri(githubUsername));
+  }
+}
+
+export function getUserInformationUri(githubUsername) {
   return `https://api.github.com/users/${githubUsername}`;
 }
 

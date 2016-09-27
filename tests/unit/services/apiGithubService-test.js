@@ -1,5 +1,5 @@
 import { expect } from 'chai';
-import { generateUserInformationRequest } from '../../../src/js/api/github/userInformation';
+import { getUserInformationUri } from '../../../src/js/api/github/userInformation';
 import * as actions from '../../../src/js/services/apiGithubService';
 
 describe('apiGithubService', function () {
@@ -25,7 +25,7 @@ describe('apiGithubService', function () {
     const githubUsername = 'sampleGithubUsername';
 
     expect(
-      generateUserInformationRequest(githubUsername)
+      getUserInformationUri(githubUsername)
     ).to.equal('https://api.github.com/users/sampleGithubUsername');
   });
 });
