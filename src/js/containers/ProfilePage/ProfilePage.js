@@ -15,6 +15,10 @@ class ProfilePage extends Component {
   }
 
   render () {
+    if (this.props.userInformation === undefined) {
+      return null;
+    }
+
     return (
       <div className="container">
         <header>

@@ -9,6 +9,7 @@ import routes                    from './src/js/routes';
 import { Provider }              from 'react-redux';
 import * as reducers             from './src/js/reducers';
 import promiseMiddleware         from './src/js/lib/promiseMiddleware';
+import thunk from 'redux-thunk';
 import fetchComponentData        from './src/js/lib/fetchComponentData';
 import { createStore,
          combineReducers,
@@ -58,7 +59,7 @@ app.use('/static', express.static(__dirname + '/build'));
 app.get('*', function response(req, res) {
     const location = createLocation(req.url);
     const reducer  = combineReducers(reducers);
-    const store    = applyMiddleware(promiseMiddleware)(createStore)(reducer);
+    const store    = applyMiddleware(promiseMiddleware, thunk)(createStore)(reducer);
 
     match({ routes, location }, (err, redirectLocation, renderProps) => {
       if(err) {
