@@ -21,6 +21,7 @@
   },
   "scripts": {
     "start": "webpack-dev-server --config ./webpack/webpack.dev.config.js --hot --inline --progress --history-api-fallback",
+    "dev-server": "babel-node devServer.js",
     "production": "npm run production:build && sudo npm run production:start",
     "e2e": "mocha tests/.setup.js tests/e2e/**/*-e2e.js",
     "test": "mocha tests/.setup.js tests/unit/**/*-test.js",
@@ -88,7 +89,9 @@
     "webpack-manifest-plugin": "1.0.1"
   },
   "dependencies": {
+    "babel-cli": "6.18.0",
     "classnames": "2.2.3",
+    "express": "4.14.0",
     "handlebars": "4.0.5",
     "isomorphic-fetch": "2.2.1",
     "less": "2.6.1",
@@ -101,6 +104,7 @@
     "react-router": "2.0.0",
     "redux": "3.5.2",
     "redux-form": "5.3.1",
-    "redux-thunk": "2.0.1"
+    "redux-thunk": "2.0.1",
+    "webpack-dev-middleware": "1.9.0"
   }
 }
