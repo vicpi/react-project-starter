@@ -34,11 +34,12 @@
     "prestart": "rm -rf build",
     "prebuild": "npm run clean:build && npm run build:html",
     "export": "npm run export-clean && npm run export-compile && npm run export-run",
-    "export-clean": "rm -rf export/build",
+    "export-clean": "rm -rf export/dist",
     "export-compile": "NODE_ENV=production webpack --config ./export/webpack.config.export.js --progress",
     "export-run": "NODE_PATH=$NODE_PATH:../src NODE_ENV=production node --harmony ./export/serverManager.js --config ./export/webpack.config.dev"
   },
   "devDependencies": {
+    "autoprefixer-loader": "3.2.0",
     "babel-core": "6.5.2",
     "babel-eslint": "4.1.8",
     "babel-loader": "6.2.3",
@@ -64,6 +65,7 @@
     "istanbul": "1.0.0-alpha.2",
     "jscs": "2.10.1",
     "jsdom": "9.2.1",
+    "json-loader": "0.5.4",
     "memory-fs": "0.3.0",
     "mocha": "2.5.3",
     "nock": "8.0.0",

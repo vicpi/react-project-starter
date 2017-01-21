@@ -13,7 +13,7 @@ const PATHS = {
   app: path.resolve(__dirname, '../'),
   styles: path.resolve(__dirname, '../src'),
   images: path.resolve(__dirname, '../src'),
-  build: path.resolve(__dirname, './build')
+  dist: path.resolve(__dirname, './dist')
 };
 
 const sassLoaders = [
@@ -32,10 +32,11 @@ const lessLoaders = [
 module.exports = {
   env : process.env.NODE_ENV,
   entry: {
-    app: path.resolve(PATHS.app, './export/main.jsx')
+    app: path.resolve(PATHS.app, './export/main.jsx'),
+    vendor: ['react']
   },
   output: {
-    path: PATHS.build,
+    path: PATHS.dist,
     filename: 'js/[name].js',
     publicPath: '/'
   },
@@ -52,7 +53,7 @@ module.exports = {
     loaders: [
       {
         test: /\.jsx?$/,
-        loaders: [ 'babel'],
+        loaders: ['babel'],
         include: PATHS.app
       },
       {
@@ -82,10 +83,14 @@ module.exports = {
       },
       {
         test: /\.(ttf|eot)$/, loader: 'file'
+      },
+      {
+        test: /\.(json)$/, loader: 'json'
       }
     ]
   },
   plugins: [
-    new ExtractTextPlugin('css/[name].css', { allChunks: true })
+    new webpack.optimize.CommonsChunkPlugin("vendor", "js/vendor.bundle.js"),
+    new ExtractTextPlugin('css/[name].css', {allChunks: true})
   ]
 };
